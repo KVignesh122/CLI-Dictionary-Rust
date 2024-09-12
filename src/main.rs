@@ -13,6 +13,8 @@ struct Definition {
 struct Meaning {
     partOfSpeech: String,
     definitions: Vec<Definition>,
+    synonyms: Vec<String>,
+    antonyms: Vec<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -24,7 +26,7 @@ struct ApiResponse {
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // let args = Cli::parse();
-    let word = "hello";
+    let word = "love";
 
     // Call the API
     let url = format!("https://api.dictionaryapi.dev/api/v2/entries/en/{}", word);
@@ -32,24 +34,30 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     if response.status().is_success() {
         let api_response: Vec<ApiResponse> = response.json().await?;
+        
         for entry in api_response {
-            println!("Word: {}\n", entry.word);
             for meaning in entry.meanings {
-                println!("Part of Speech: {}", meaning.partOfSpeech);
-                for def in meaning.definitions {
-                    println!("Definition: {}", def.definition);
-                    if !def.synonyms.is_empty() {
-                        println!("Synonyms: {:?}", def.synonyms);
-                    }
-                    if !def.antonyms.is_empty() {
-                        println!("Antonyms: {:?}", def.antonyms);
-                    }
+                // Mention word type
+                println!("As a {}:", meaning.partOfSpeech);
+                
+                // List all definitions for word used as that type
+                for (index, def) in meaning.definitions.iter().enumerate() {
+                    println!("{}) {}", index+1, def.definition);
                 }
+                
+                // List all synonyms and antonyms for word used as that type
+                if !meaning.synonyms.is_empty() {
+                    println!("Synonyms: {:?}", meaning.synonyms);
+                }
+                if !meaning.antonyms.is_empty() {
+                    println!("Antonyms: {:?}", meaning.antonyms);
+                }
+
                 println!();
             }
         }
     } else {
-        println!("Word not found");
+        println!("ERROR: Word not found or no internet connection.");
     }
 
     Ok(())
