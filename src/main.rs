@@ -2,7 +2,18 @@ use reqwest::get;
 use serde::{Deserialize, Serialize};
 use colored::*;
 use text_to_ascii_art::to_art;
-// use clap::Parser;
+use clap::Parser;
+
+/// Simple CLI tool to fetch and print word meanings and synonyms
+#[derive(Parser)]
+#[command(name = "CLI Dictionary")]
+#[command(author = "KVignesh122")]
+#[command(version = "1.0")]
+#[command(about = "Fetches definitions, synonyms, and antonyms for given English word")]
+struct Cli {
+    /// The word to look up
+    word: String,
+}
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Definition {
@@ -28,8 +39,8 @@ struct ApiResponse {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // let args = Cli::parse();
-    let word = "love";
+    let args = Cli::parse();
+    let word = args.word.to_lowercase();
 
     // Call the API
     let url = format!("https://api.dictionaryapi.dev/api/v2/entries/en/{}", word);
@@ -71,7 +82,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     } else {
-        println!("ERROR: Word not found or no internet connection.");
+        println!("\n*** ERROR: Word not found or no internet connection. ***\n");
     }
 
     Ok(())
