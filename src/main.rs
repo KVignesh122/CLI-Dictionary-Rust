@@ -1,6 +1,7 @@
 use reqwest::get;
 use serde::{Deserialize, Serialize};
 use colored::*;
+use text_to_ascii_art::to_art;
 // use clap::Parser;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -37,10 +38,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     if response.status().is_success() {
         let api_response: Vec<ApiResponse> = response.json().await?;
         
+        // Print word as ASCII Art
         println!();
-        println!("==================================================");
-        println!("\tWord: {}", word);
-        println!("==================================================\n");
+        match to_art(word.to_string(),"standard", 0, 0, 0) {
+            Ok(word) => println!("{}", word),
+            Err(err) => println!("Error generating ASCII art: {}", err),
+        }
+        println!();
 
         for entry in api_response {
             for meaning in entry.meanings {
