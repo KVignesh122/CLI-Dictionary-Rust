@@ -1,5 +1,6 @@
 use reqwest::get;
 use serde::{Deserialize, Serialize};
+use colored::*;
 // use clap::Parser;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -11,7 +12,8 @@ struct Definition {
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Meaning {
-    partOfSpeech: String,
+    #[serde(rename = "partOfSpeech")] 
+    part_of_speech: String,
     definitions: Vec<Definition>,
     synonyms: Vec<String>,
     antonyms: Vec<String>,
@@ -35,22 +37,30 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     if response.status().is_success() {
         let api_response: Vec<ApiResponse> = response.json().await?;
         
+        println!();
+        println!("==================================================");
+        println!("\tWord: {}", word);
+        println!("==================================================\n");
+
         for entry in api_response {
             for meaning in entry.meanings {
                 // Mention word type
-                println!("As a {}:", meaning.partOfSpeech);
+                println!("===============================");
+                println!("{}", format!("\tAs a {}", meaning.part_of_speech.to_uppercase()).bold().cyan());
+                println!("-------------------------------");
                 
                 // List all definitions for word used as that type
                 for (index, def) in meaning.definitions.iter().enumerate() {
-                    println!("{}) {}", index+1, def.definition);
+                    println!("  {}) {}", (index + 1).to_string().green(), def.definition);
                 }
                 
                 // List all synonyms and antonyms for word used as that type
+                println!();
                 if !meaning.synonyms.is_empty() {
-                    println!("Synonyms: {:?}", meaning.synonyms);
+                    println!("Synonyms: {}", meaning.synonyms.join(", "));
                 }
                 if !meaning.antonyms.is_empty() {
-                    println!("Antonyms: {:?}", meaning.antonyms);
+                    println!("Antonyms: {}", meaning.antonyms.join(", "));
                 }
 
                 println!();
