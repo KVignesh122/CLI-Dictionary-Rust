@@ -99,12 +99,6 @@ Synonyms: corrode, oxidise, oxidize
 
 ---
 
-## 📄 License
-
-This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
-
----
-
 ## ❓ FAQ
 
 1. **How do I handle API errors or connection issues?**
@@ -125,5 +119,11 @@ This project is licensed under the **MIT License** – see the [LICENSE](LICENSE
 ## 🌟 Show Your Support
 
 If you find this project useful, please **star** the repository on GitHub to show your support! 🚀
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
 
 ---
