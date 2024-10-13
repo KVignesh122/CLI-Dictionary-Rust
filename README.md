@@ -2,6 +2,8 @@
 
 **CLI Dictionary & Thesaurus** is a **fast and sleek Rust-based command-line tool** 🚀 that **fetches definitions, synonyms, and antonyms** for any **English** word you query. With **ASCII art headers, color-coded output, and cross-platform binaries for Windows, macOS, and Linux**, this tool offers a fun and efficient way to explore words **directly from the terminal**. ✨
 
+<img src="https://github.com/user-attachments/assets/22edd3e4-e235-43be-8a3d-f5fd34104da1" alt="Demo GIF" width="510" height="370"/>
+
 ---
 
 ## 📥 Installation & Usage
