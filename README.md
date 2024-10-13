@@ -1,18 +1,6 @@
 # 🌐 CLI Dictionary & Thesaurus – Rust-powered Word Lookup Tool
 
-Welcome to **CLI Dictionary & Thesaurus**, a sleek and fast command-line tool written in **Rust**! 🚀 This tool lets you fetch **definitions, synonyms, and antonyms** for any English word you query, all in a beautifully formatted output with **ASCII art headers** to add some flair!
-
-Designed for **speed** and **ease of use**, this project aims to help both developers and enthusiasts quickly look up words without leaving the terminal.
-
----
-
-## ✨ Features
-
-- **Word Lookup with ASCII Art**: Enter any English word and see it rendered beautifully in **ASCII art**.
-- **Multiple Definitions**: Get **all possible meanings** with clear labels by parts of speech (noun, verb, etc.).
-- **Synonyms and Antonyms**: Find **related and opposite words** to enrich your vocabulary.
-- **Color-Coded Output**: Enjoy enhanced readability with **colored and organized sections**.
-- **Cross-platform Binaries**: Pre-built executables for **Windows, macOS, and Linux** systems.
+**CLI Dictionary & Thesaurus** is a **fast and sleek Rust-based command-line tool** 🚀 that **fetches definitions, synonyms, and antonyms** for any **English** word you query. With **ASCII art headers, color-coded output, and cross-platform binaries for Windows, macOS, and Linux**, this tool offers a fun and efficient way to explore words **directly from the terminal**. ✨
 
 ---
 
